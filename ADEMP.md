@@ -13,15 +13,15 @@ The main experiment changes the covariance exponent $\beta$ and student width wh
 Let $x\sim N(0,\Sigma)$, where
 
 $$
-\Sigma=\operatorname{diag}(i^{-\beta})_{i=1}^d,\qquad
-T=\operatorname{diag}(i^{-\alpha})_{i=1}^d,\qquad
+\Sigma=\mathrm{diag}(i^{-\beta})_{i=1}^d,\qquad
+T=\mathrm{diag}(i^{-\alpha})_{i=1}^d,\qquad
 B=\frac{T}{\|T\Sigma\|_F}.
 $$
 
 The centered teacher response is
 
 $$
-y=x^\top Bx-\operatorname{tr}(\Sigma B).
+y=x^\top Bx-\mathrm{tr}(\Sigma B).
 $$
 
 I do not add observation noise. Rather than sampling a finite training dataset, I evaluate the Gaussian population expectations analytically. The student model is
@@ -57,7 +57,7 @@ With $M=WW^\top/r_s$, the population excess risk is
 
 $$
 R(W,b)=\|\Sigma^{1/2}(M-B)\Sigma^{1/2}\|_F^2
-+\frac12\bigl(b-\operatorname{tr}(\Sigma M)\bigr)^2.
++\frac12\bigl(b-\mathrm{tr}(\Sigma M)\bigr)^2.
 $$
 
 For each condition and time point, I estimate the mean risk over randomized initializations. I also calculate the best possible rank-constrained risk in this aligned model:
