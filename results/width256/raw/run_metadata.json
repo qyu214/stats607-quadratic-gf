@@ -1,0 +1,38 @@
+{
+  "config": {
+    "study_id": "d256_width32_64_128_pilot_5seeds",
+    "note": "Exploratory d=256 three-width sensitivity; five initializations per width. Independent W0,b0 across widths. Not sufficient for strong scaling-law inference.",
+    "dimension": 256,
+    "student_widths": [
+      32,
+      64,
+      128
+    ],
+    "covariance_exponents": [
+      0.35
+    ],
+    "alpha_plus_beta": 0.7,
+    "teacher_rank": null,
+    "initialization_std": "paper",
+    "bias_initialization": "normal",
+    "delta": 0.05,
+    "n_replicates": 5,
+    "master_seed": 20261019,
+    "time_grid": "log",
+    "time_start": 0.02,
+    "time_max": 160.0,
+    "n_time_points": 101,
+    "rtol": 1e-06,
+    "atol": 1e-08
+  },
+  "elapsed_simulation_seconds": 33.37259216699749,
+  "rng": "SeedSequence(master_seed, dimension, student_width, replicate)",
+  "comparison": "paired W0/b0 across beta at fixed dimension, width, replicate",
+  "gf_convention": "Main paper Eq (2.2) and (GF); zero observation noise",
+  "environment": {
+    "python": "3.13.15",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "pandas": "3.0.6"
+  }
+}

@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.DS_Store
+*.egg-info/
+# Raw generated data may be large; this starter tracks small pilot outputs only.

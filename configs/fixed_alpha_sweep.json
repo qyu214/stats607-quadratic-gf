@@ -1,0 +1,26 @@
+{
+  "study_id": "fixed_alpha_035_beta_025_035_055_d32_r16",
+  "note": "Exploratory fixed-teacher-exponent sensitivity experiment. Unlike the main alpha+beta=0.7 design, rank floors differ by beta. Pair initializations across beta.",
+  "dimension": 32,
+  "student_widths": [
+    16
+  ],
+  "covariance_exponents": [
+    0.25,
+    0.35,
+    0.55
+  ],
+  "teacher_exponent": 0.35,
+  "teacher_rank": null,
+  "initialization_std": "paper",
+  "bias_initialization": "normal",
+  "delta": 0.05,
+  "n_replicates": 10,
+  "master_seed": 20261019,
+  "time_grid": "log",
+  "time_start": 0.02,
+  "time_max": 80.0,
+  "n_time_points": 75,
+  "rtol": 1e-06,
+  "atol": 1e-08
+}
