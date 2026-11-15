@@ -1,82 +1,61 @@
-# Project 3 — Baseline Performance
+# Baseline Performance
 
-## Scope and preservation
+I used the original Project 2 code as the baseline, before changing the gradient-flow implementation. The code is preserved in the `project2-baseline` branch (commit `95593a993815e8147d0fb53ab1284c3731964964`). All runs below use RK45 with `rtol=1e-6` and `atol=1e-8`.
 
-This document records performance of the **unchanged Project 2 implementation** on 2026-11-14, before Project 3 optimization. The reference implementation is the repository's original `main` snapshot (commit `95593a993815e8147d0fb53ab1284c3731964964`), also preserved in the `project2-baseline` branch.
+## 1. Runtime
 
-The original simulation uses SciPy `solve_ivp` with RK45 and tolerances `rtol=1e-6`, `atol=1e-8`. Three studies are launched by `make all`: the main `d=32` study, the `d=256` width follow-up, and the fixed-alpha `d=32` follow-up. There are 105 executed trajectories, including 10 reused conditions across the main and fixed-alpha studies.
+I ran the full Project 2 workflow on my Mac:
 
-## Whole-study runtime (baseline)
-
-Measured locally on a Mac using a terminal, after `make test` passed (14 tests):
-
-```shell
+```bash
 { time make all; } 2>&1 | tee results/performance/baseline.log
 ```
 
-| Component | Reported elapsed time |
-| --- | ---: |
-| Main study (`d=32`, 60 trajectories) | 5.08 s |
-| Width follow-up (`d=256`, 15 trajectories) | 33.67 s |
-| Fixed-alpha follow-up (`d=32`, 30 trajectories) | 2.60 s |
-| **Full `make all` including analysis and figures** | **47.615 s** |
+| Experiment | Settings | Trajectories | Simulation time |
+| --- | --- | ---: | ---: |
+| Main | `d=32`, widths 8 and 16, three values of `beta`, `T=80` | 60 | 5.08 s |
+| Width follow-up | `d=256`, widths 32, 64 and 128, `T=160` | 15 | 33.67 s |
+| Fixed-alpha follow-up | `d=32`, width 16, three values of `beta`, `T=80` | 30 | 2.60 s |
+| **Full `make all`** | **Simulation, analysis and figures** | **105** | **47.615 s total** |
 
-The three simulation-stage timings add to 41.35 s; the full wall-clock time also includes startup, analysis, plotting, and command overhead. The `d=256` stage accounts for approximately 70.7% of the measured whole-study runtime. These are initial single-run measurements, not repeated benchmark estimates.
+The simulation stages took 41.35 s in total; the remaining time was spent on startup, analysis, plotting and other overhead. The `d=256` experiment alone took 33.67 s, about 71% of the full runtime. The 105 trajectories include 10 repeated conditions shared by the main and fixed-alpha experiments. This is one baseline timing run, not an average over repeated timings. The existing test suite passed (14 tests).
 
-## Representative CPU profiling
+## 2. Profiling
 
-To avoid profiling the entire study, the original `d=256` experiment was run with `r_s=64`, one random initialization, `alpha=beta=0.35`, `T=160`, and the original RK45 tolerances:
+I used `cProfile` on one representative trajectory: `d=256`, `r_s=64`, `alpha=beta=0.35`, `T=160`, one initialization, with the same RK45 tolerances.
 
-```shell
+```bash
 python3 -m cProfile -o results/performance/baseline.prof -m src.simulation \
   --config results/performance/profile_config.json \
   --output results/performance/profile_trajectories.csv
-
-python3 -c 'import pstats; pstats.Stats("results/performance/baseline.prof").strip_dirs().sort_stats("cumtime").print_stats(25)'
 ```
 
-The profiled process took **2.932 s** including module imports. The `simulate` function took **2.245 s** and `solve_ivp` took **2.225 s** in cumulative profiled time.
-
-| Function | Calls | Cumulative profiled time |
+| Function | Calls | Cumulative time |
 | --- | ---: | ---: |
 | `solve_paper_population_gf` | 1 | 2.244 s |
 | `solve_ivp` | 1 | 2.225 s |
 | `rhs` | 9,398 | 2.023 s |
 | `population_risk_and_gradients` | 9,499 | 1.944 s |
 
-The risk-and-gradient routine accounted for approximately **86.6% of simulation time** (1.944 / 2.245). Its 9,499 invocations comprise 9,398 RHS evaluations and 101 post-solve risk evaluations at requested times. The RK45 solver completed 1,481 steps in this profile.
+The simulation took 2.245 s under the profiler (2.932 s including imports). About **86.6%** of the simulation time was spent in `population_risk_and_gradients`. It was called 9,398 times by the ODE solver and another 101 times to evaluate risk at the saved time points.
 
-**Identified bottleneck:** Each `population_risk_and_gradients` call constructs `G = W @ W.T / r_s` and a dense `d x d` weighted residual, then multiplies by `W`. The RHS also computes a risk value that the integrator does not need. This motivates a mathematically equivalent low-rank reformulation and separation of gradient evaluation from risk evaluation.
+This is the main bottleneck. Each call forms `G = W @ W.T / r_s` and a weighted `d x d` residual matrix. The RHS also computes the risk even though the ODE solver only needs gradients. These are the operations I will focus on optimizing. The profiled times include profiling overhead, so I will use separate, unprofiled runs for speed comparisons.
 
-Profiler timings include instrumentation overhead and must not be used as the speed denominator for final benchmarks.
+## 3. Computational complexity
 
-## Computational complexity (baseline)
+Let `W` have shape `d x r_s`. In the current implementation:
 
-For `W` of shape `d x r_s`:
+- `W @ W.T` costs `O(d^2 r_s)`.
+- Multiplying the weighted `d x d` residual by `W` also costs `O(d^2 r_s)`.
+- Forming and weighting the residual costs `O(d^2)`.
 
-- Forming `W @ W.T`: `O(d^2 r_s)` arithmetic, `O(d^2)` temporary storage.
-- Weighting the dense residual: `O(d^2)` arithmetic and storage.
-- Multiplying the weighted residual by `W`: `O(d^2 r_s)` arithmetic.
-- Remaining scalar/vector operations: at most `O(d r_s + d^2)` per evaluation.
+Therefore, **one risk/gradient evaluation costs `O(d^2 r_s)`**, with `O(d^2)` temporary matrix storage. If the solver uses `N_f` RHS evaluations and saves `N_t` time points, the main computation is approximately `O((N_f+N_t)d^2 r_s)`. The actual runtime also depends on the number of solver evaluations, which can change with the dimension and numerical tolerances.
 
-Thus, for this implementation, one population risk/gradient evaluation costs **`O(d^2 r_s)`** for `r_s >= 1`, with a dense **`O(d^2)`** intermediate. For `N_f` RHS evaluations and `N_o` recorded time points, the leading compute work is `O((N_f+N_o)d^2 r_s)`. The full solver runtime also depends on how `N_f` varies with dimension, time horizon, and tolerance, and on numerical-library performance.
+This is a theoretical complexity estimate for the original algorithm. I will compare the scaling empirically in the optimization benchmarks.
 
-An empirical dimension-scaling benchmark will be added using the same experimental settings for baseline and optimized versions.
+## 4. Numerical warnings and convergence
 
-## Numerical warnings and convergence issues
+No numerical warnings, exceptions or solver failures appeared in the console output for the **105 trajectories** in `make all` (the conditions in the first table), or for the **one profiled trajectory** at `d=256`, `r_s=64`, `T=160`. The existing 14 tests also passed.
 
-- **Observed in the provided local run:** `make test` passed all 14 tests; the full `make all` completed all 105 trajectories and produced outputs; the profiled single trajectory completed. No warnings or exceptions were visible in the supplied console output.
-- **Limitation:** These commands did not systematically count or classify numerical warnings. Therefore, it is **not** yet justified to claim a zero failure rate under all conditions.
-- **Planned check:** run a dedicated stability-check across representative dimensions, widths, and solver tolerances; record warnings, non-finite results, solver failures, and discrepancies in the monotone risk and rank-floor diagnostics, with counts and test conditions.
+Thus the *observed* warning/failure counts were **0/105** for the full study and **0/1** for the profiling run. These counts are based on console output and successful completion, not on a separate automated warning log. They do not establish that the numerical error is negligible. I will check additional conditions, solver tolerances and risk behavior in `make stability-check`.
 
-## Evidence and reproducibility
-
-Local evidence was generated under `results/performance/`:
-
-- `baseline.log` — full-study console output and wall-clock timing
-- `profile_config.json` — one-replicate profiling condition
-- `baseline.prof` — binary `cProfile` output
-- `profile_summary.txt` — human-readable top cumulative-time functions
-- `profile_trajectories.csv` — profiled run's risk trajectory
-
-These outputs are local files unless explicitly committed. Do not mix baseline profiler timings with unprofiled benchmark timings. The Project 3 optimization report will separately quantify measured improvements, numerical agreement, and trade-offs.
+The local baseline evidence is saved under `results/performance/`: `baseline.log`, `profile_config.json`, `baseline.prof`, `profile_summary.txt` and `profile_trajectories.csv`.
