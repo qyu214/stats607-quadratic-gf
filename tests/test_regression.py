@@ -59,7 +59,7 @@ def test_full_trajectory(config_path, width):
     times = build_times(cfg)
 
     args = (W0, b0, lam, B, times)
-    opts = dict(delta=cfg["delta"], rtol=cfg["rtol"], atol=cfg["atol"])
+    opts = dict(delta=cfg["delta"], rtol=1e-8, atol=1e-10)
 
     t_old, risk_old, e_old = solve_paper_population_gf(*args, **opts)
     t_new, risk_new, e_new = solve_paper_population_gf_optimized(*args, **opts)
