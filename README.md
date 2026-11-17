@@ -46,6 +46,8 @@ For Project 3, I optimized the gradient-flow simulation in two ways:
 
 The original solver is in `src/methods.py`, and the low-rank implementation is in `src/methods_optimized.py`.
 
+For a quick check of the optimized solver, run `make demo` (one small trajectory).
+
 The performance experiments can be run with:
 
 ```bash

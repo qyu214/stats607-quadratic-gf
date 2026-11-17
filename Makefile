@@ -59,3 +59,9 @@ parallel:
 stability-check:
 	$(PYTHON) -m scripts.stability_check --tight --output results/performance/stability_baseline.csv --summary results/performance/stability_baseline_summary.md
 	$(PYTHON) -m scripts.stability_check_optimized --tight --output results/performance/stability_optimized.csv --summary results/performance/stability_optimized_summary.md
+
+# A quick, one-trajectory smoke test. Does not rerun the full benchmark.
+.PHONY: demo
+demo:
+	$(THREAD_ENV) $(PYTHON) -m scripts.run_optimized_study --config configs/demo.json --workers 1 --output results/performance/demo/trajectories.csv
+	$(PYTHON) -c 'import pandas as pd; p="results/performance/demo/trajectories.csv"; d=pd.read_csv(p); assert len(d)==21 and d.population_risk.notna().all(); print(f"Demo OK: {len(d)} saved time points; final risk = {d.population_risk.iloc[-1]:.6g}")'
