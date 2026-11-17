@@ -1,0 +1,139 @@
+python3 -m src.simulation --config config.json --output results/raw/trajectories.csv
+Completed 1/60: beta=0.1, alpha=0.60, r_s=8, rep=0
+Completed 2/60: beta=0.35, alpha=0.35, r_s=8, rep=0
+Completed 3/60: beta=0.6, alpha=0.10, r_s=8, rep=0
+Completed 4/60: beta=0.1, alpha=0.60, r_s=8, rep=1
+Completed 5/60: beta=0.35, alpha=0.35, r_s=8, rep=1
+Completed 6/60: beta=0.6, alpha=0.10, r_s=8, rep=1
+Completed 7/60: beta=0.1, alpha=0.60, r_s=8, rep=2
+Completed 8/60: beta=0.35, alpha=0.35, r_s=8, rep=2
+Completed 9/60: beta=0.6, alpha=0.10, r_s=8, rep=2
+Completed 10/60: beta=0.1, alpha=0.60, r_s=8, rep=3
+Completed 11/60: beta=0.35, alpha=0.35, r_s=8, rep=3
+Completed 12/60: beta=0.6, alpha=0.10, r_s=8, rep=3
+Completed 13/60: beta=0.1, alpha=0.60, r_s=8, rep=4
+Completed 14/60: beta=0.35, alpha=0.35, r_s=8, rep=4
+Completed 15/60: beta=0.6, alpha=0.10, r_s=8, rep=4
+Completed 16/60: beta=0.1, alpha=0.60, r_s=8, rep=5
+Completed 17/60: beta=0.35, alpha=0.35, r_s=8, rep=5
+Completed 18/60: beta=0.6, alpha=0.10, r_s=8, rep=5
+Completed 19/60: beta=0.1, alpha=0.60, r_s=8, rep=6
+Completed 20/60: beta=0.35, alpha=0.35, r_s=8, rep=6
+Completed 21/60: beta=0.6, alpha=0.10, r_s=8, rep=6
+Completed 22/60: beta=0.1, alpha=0.60, r_s=8, rep=7
+Completed 23/60: beta=0.35, alpha=0.35, r_s=8, rep=7
+Completed 24/60: beta=0.6, alpha=0.10, r_s=8, rep=7
+Completed 25/60: beta=0.1, alpha=0.60, r_s=8, rep=8
+Completed 26/60: beta=0.35, alpha=0.35, r_s=8, rep=8
+Completed 27/60: beta=0.6, alpha=0.10, r_s=8, rep=8
+Completed 28/60: beta=0.1, alpha=0.60, r_s=8, rep=9
+Completed 29/60: beta=0.35, alpha=0.35, r_s=8, rep=9
+Completed 30/60: beta=0.6, alpha=0.10, r_s=8, rep=9
+Completed 31/60: beta=0.1, alpha=0.60, r_s=16, rep=0
+Completed 32/60: beta=0.35, alpha=0.35, r_s=16, rep=0
+Completed 33/60: beta=0.6, alpha=0.10, r_s=16, rep=0
+Completed 34/60: beta=0.1, alpha=0.60, r_s=16, rep=1
+Completed 35/60: beta=0.35, alpha=0.35, r_s=16, rep=1
+Completed 36/60: beta=0.6, alpha=0.10, r_s=16, rep=1
+Completed 37/60: beta=0.1, alpha=0.60, r_s=16, rep=2
+Completed 38/60: beta=0.35, alpha=0.35, r_s=16, rep=2
+Completed 39/60: beta=0.6, alpha=0.10, r_s=16, rep=2
+Completed 40/60: beta=0.1, alpha=0.60, r_s=16, rep=3
+Completed 41/60: beta=0.35, alpha=0.35, r_s=16, rep=3
+Completed 42/60: beta=0.6, alpha=0.10, r_s=16, rep=3
+Completed 43/60: beta=0.1, alpha=0.60, r_s=16, rep=4
+Completed 44/60: beta=0.35, alpha=0.35, r_s=16, rep=4
+Completed 45/60: beta=0.6, alpha=0.10, r_s=16, rep=4
+Completed 46/60: beta=0.1, alpha=0.60, r_s=16, rep=5
+Completed 47/60: beta=0.35, alpha=0.35, r_s=16, rep=5
+Completed 48/60: beta=0.6, alpha=0.10, r_s=16, rep=5
+Completed 49/60: beta=0.1, alpha=0.60, r_s=16, rep=6
+Completed 50/60: beta=0.35, alpha=0.35, r_s=16, rep=6
+Completed 51/60: beta=0.6, alpha=0.10, r_s=16, rep=6
+Completed 52/60: beta=0.1, alpha=0.60, r_s=16, rep=7
+Completed 53/60: beta=0.35, alpha=0.35, r_s=16, rep=7
+Completed 54/60: beta=0.6, alpha=0.10, r_s=16, rep=7
+Completed 55/60: beta=0.1, alpha=0.60, r_s=16, rep=8
+Completed 56/60: beta=0.35, alpha=0.35, r_s=16, rep=8
+Completed 57/60: beta=0.6, alpha=0.10, r_s=16, rep=8
+Completed 58/60: beta=0.1, alpha=0.60, r_s=16, rep=9
+Completed 59/60: beta=0.35, alpha=0.35, r_s=16, rep=9
+Completed 60/60: beta=0.6, alpha=0.10, r_s=16, rep=9
+Saved 4500 timepoint records in results/raw/trajectories.csv; runtime 5.08s
+python3 -m src.analyze --raw results/raw/trajectories.csv --output results/summary.csv --endpoints results/endpoints.csv
+Saved 450 curve summaries to results/summary.csv
+Saved 6 endpoint summaries to results/endpoints.csv
+ beta  student_width  mean_final_risk  rank_floor  mean_final_gap  mcse_final_gap
+ 0.60              8         0.178413    0.177366        0.001047        0.000242
+ 0.60             16         0.082126    0.077850        0.004276        0.000477
+ 0.35              8         0.177591    0.177366        0.000225        0.000065
+ 0.35             16         0.079897    0.077850        0.002047        0.000353
+ 0.10              8         0.177387    0.177366        0.000020        0.000007
+ 0.10             16         0.078637    0.077850        0.000788        0.000183
+python3 -m src.figures --raw results/raw/trajectories.csv --summary results/summary.csv --endpoints results/endpoints.csv --out results/figures
+Saved 5 figure pairs (.png/.pdf) to results/figures
+bash scripts/run_d256_width.sh
+Completed 1/15: beta=0.35, alpha=0.35, r_s=32, rep=0
+Completed 2/15: beta=0.35, alpha=0.35, r_s=32, rep=1
+Completed 3/15: beta=0.35, alpha=0.35, r_s=32, rep=2
+Completed 4/15: beta=0.35, alpha=0.35, r_s=32, rep=3
+Completed 5/15: beta=0.35, alpha=0.35, r_s=32, rep=4
+Completed 6/15: beta=0.35, alpha=0.35, r_s=64, rep=0
+Completed 7/15: beta=0.35, alpha=0.35, r_s=64, rep=1
+Completed 8/15: beta=0.35, alpha=0.35, r_s=64, rep=2
+Completed 9/15: beta=0.35, alpha=0.35, r_s=64, rep=3
+Completed 10/15: beta=0.35, alpha=0.35, r_s=64, rep=4
+Completed 11/15: beta=0.35, alpha=0.35, r_s=128, rep=0
+Completed 12/15: beta=0.35, alpha=0.35, r_s=128, rep=1
+Completed 13/15: beta=0.35, alpha=0.35, r_s=128, rep=2
+Completed 14/15: beta=0.35, alpha=0.35, r_s=128, rep=3
+Completed 15/15: beta=0.35, alpha=0.35, r_s=128, rep=4
+Saved 1515 timepoint records in results/width256/raw/trajectories.csv; runtime 33.67s
+ student_width  time  n  mean_risk  rank_floor   mean_gap    mcse_gap
+            32    80  5   0.127496    0.123261 0.00423471 0.000162231
+            32   160  5   0.124309    0.123261 0.00104744 8.70978e-05
+            64    80  5  0.0826032    0.070703  0.0119002 0.000197711
+            64   160  5   0.073769    0.070703 0.00306598 0.000101258
+           128    80  5  0.0574161   0.0305513  0.0268648 0.000155219
+           128   160  5  0.0376922   0.0305513 0.00714088 6.46591e-05
+Saved plots and summary to: results/width256
+bash scripts/run_fixed_alpha.sh
+Completed 1/30: beta=0.25, alpha=0.35, r_s=16, rep=0
+Completed 2/30: beta=0.35, alpha=0.35, r_s=16, rep=0
+Completed 3/30: beta=0.55, alpha=0.35, r_s=16, rep=0
+Completed 4/30: beta=0.25, alpha=0.35, r_s=16, rep=1
+Completed 5/30: beta=0.35, alpha=0.35, r_s=16, rep=1
+Completed 6/30: beta=0.55, alpha=0.35, r_s=16, rep=1
+Completed 7/30: beta=0.25, alpha=0.35, r_s=16, rep=2
+Completed 8/30: beta=0.35, alpha=0.35, r_s=16, rep=2
+Completed 9/30: beta=0.55, alpha=0.35, r_s=16, rep=2
+Completed 10/30: beta=0.25, alpha=0.35, r_s=16, rep=3
+Completed 11/30: beta=0.35, alpha=0.35, r_s=16, rep=3
+Completed 12/30: beta=0.55, alpha=0.35, r_s=16, rep=3
+Completed 13/30: beta=0.25, alpha=0.35, r_s=16, rep=4
+Completed 14/30: beta=0.35, alpha=0.35, r_s=16, rep=4
+Completed 15/30: beta=0.55, alpha=0.35, r_s=16, rep=4
+Completed 16/30: beta=0.25, alpha=0.35, r_s=16, rep=5
+Completed 17/30: beta=0.35, alpha=0.35, r_s=16, rep=5
+Completed 18/30: beta=0.55, alpha=0.35, r_s=16, rep=5
+Completed 19/30: beta=0.25, alpha=0.35, r_s=16, rep=6
+Completed 20/30: beta=0.35, alpha=0.35, r_s=16, rep=6
+Completed 21/30: beta=0.55, alpha=0.35, r_s=16, rep=6
+Completed 22/30: beta=0.25, alpha=0.35, r_s=16, rep=7
+Completed 23/30: beta=0.35, alpha=0.35, r_s=16, rep=7
+Completed 24/30: beta=0.55, alpha=0.35, r_s=16, rep=7
+Completed 25/30: beta=0.25, alpha=0.35, r_s=16, rep=8
+Completed 26/30: beta=0.35, alpha=0.35, r_s=16, rep=8
+Completed 27/30: beta=0.55, alpha=0.35, r_s=16, rep=8
+Completed 28/30: beta=0.25, alpha=0.35, r_s=16, rep=9
+Completed 29/30: beta=0.35, alpha=0.35, r_s=16, rep=9
+Completed 30/30: beta=0.55, alpha=0.35, r_s=16, rep=9
+Saved 2250 timepoint records in results/fixed_alpha/raw/trajectories.csv; runtime 2.60s
+Saved 225 curve summaries to results/fixed_alpha/summary.csv
+Saved 3 endpoint summaries to results/fixed_alpha/endpoints.csv
+ beta  student_width  mean_final_risk  rank_floor  mean_final_gap  mcse_final_gap
+ 0.25             16         0.118387    0.116730        0.001657        0.000324
+ 0.35             16         0.079897    0.077850        0.002047        0.000353
+ 0.55             16         0.033515    0.030763        0.002752        0.000288
+Saved 2 figure pairs (.png/.pdf) to results/fixed_alpha/figures
+make all  45.93s user 0.73s system 97% cpu 47.615 total

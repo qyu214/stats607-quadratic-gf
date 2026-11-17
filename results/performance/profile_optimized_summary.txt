@@ -1,0 +1,38 @@
+Sun Nov 15 13:39:44 2026    results/performance/optimized.prof
+
+         1358237 function calls (1332676 primitive calls) in 1.449 seconds
+
+   Ordered by: cumulative time
+   List reduced from 3557 to 30 due to restriction <30>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+      120    0.001    0.000    1.941    0.016 __init__.py:1(<module>)
+    821/1    0.003    0.000    1.449    1.449 {built-in method builtins.exec}
+        1    0.000    0.000    1.449    1.449 <frozen runpy>:206(run_module)
+        1    0.000    0.000    1.449    1.449 <frozen runpy>:65(_run_code)
+        1    0.000    0.000    1.449    1.449 memory_algorithmic.py:1(<module>)
+        1    0.000    0.000    0.745    0.745 simulation.py:63(main)
+        1    0.000    0.000    0.740    0.740 simulation.py:22(simulate)
+        1    0.000    0.000    0.738    0.738 methods_optimized.py:24(solve_paper_population_gf_optimized)
+        1    0.001    0.001    0.719    0.719 ivp.py:160(solve_ivp)
+    986/7    0.002    0.000    0.706    0.101 <frozen importlib._bootstrap>:1349(_find_and_load)
+     1481    0.001    0.000    0.706    0.000 base.py:179(step)
+    976/7    0.002    0.000    0.706    0.101 <frozen importlib._bootstrap>:1304(_find_and_load_unlocked)
+    940/6    0.001    0.000    0.705    0.118 <frozen importlib._bootstrap>:911(_load_unlocked)
+    794/5    0.001    0.000    0.705    0.141 <frozen importlib._bootstrap_external>:1017(exec_module)
+     1481    0.023    0.000    0.705    0.000 rk.py:111(_step_impl)
+  2285/12    0.002    0.000    0.702    0.059 <frozen importlib._bootstrap>:480(_call_with_frames_removed)
+    611/3    0.000    0.000    0.702    0.234 {built-in method builtins.__import__}
+   1017/5    0.001    0.000    0.702    0.140 <frozen importlib._bootstrap>:1398(_handle_fromlist)
+        1    0.000    0.000    0.702    0.702 simulation.py:1(<module>)
+     1566    0.146    0.000    0.655    0.000 rk.py:14(rk_step)
+     9398    0.002    0.000    0.509    0.000 base.py:156(fun)
+     9398    0.003    0.000    0.507    0.000 base.py:23(fun_wrapped)
+     9398    0.009    0.000    0.503    0.000 methods_optimized.py:36(rhs)
+     9398    0.400    0.000    0.434    0.000 methods_optimized.py:8(low_rank_field)
+        1    0.000    0.000    0.362    0.362 methods.py:1(<module>)
+   137/82    0.000    0.000    0.263    0.003 <frozen importlib._bootstrap_external>:1323(exec_module)
+   137/82    0.044    0.000    0.262    0.003 {built-in method _imp.exec_dynamic}
+      940    0.001    0.000    0.247    0.000 <frozen importlib._bootstrap>:806(module_from_spec)
+      137    0.000    0.000    0.240    0.002 <frozen importlib._bootstrap_external>:1315(create_module)
+      137    0.240    0.002    0.240    0.002 {built-in method _imp.create_dynamic}

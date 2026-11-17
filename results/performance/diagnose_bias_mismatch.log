@@ -1,0 +1,18 @@
+
+Default tolerances:
+  Max risk difference: 3.536e-10
+  Max e difference:    1.360e-05
+  At t=146.115010:
+    Original e:  -3.762877732516e-04
+    Optimized e: -3.626856676755e-04
+    Difference:  1.360e-05
+  Original CSV vs rerun: 9.926e-17
+  Optimized CSV vs rerun: 1.110e-16
+
+Tight tolerances:
+  Max risk difference: 2.220e-16
+  Max e difference:    4.263e-13
+  At t=146.115010:
+    Original e:  -3.950759563294e-04
+    Optimized e: -3.950759564759e-04
+    Difference:  1.465e-13

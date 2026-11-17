@@ -1,0 +1,19 @@
+study,comparison,metric,rows,max_abs_difference,flags_at_diagnostic_tolerance
+main,V0 vs V1,population_risk,4500,3.5388358909926865e-14,0
+main,V0 vs V1,bias_mismatch,4500,1.6370806932286541e-09,0
+main,V0 vs V2,population_risk,4500,3.5388358909926865e-14,0
+main,V0 vs V2,bias_mismatch,4500,1.6370806932286541e-09,0
+main,V1 vs V2,population_risk,4500,0.0,0
+main,V1 vs V2,bias_mismatch,4500,0.0,0
+width256,V0 vs V1,population_risk,1515,3.5361510247744476e-10,0
+width256,V0 vs V1,bias_mismatch,1515,1.36021055762e-05,6
+width256,V0 vs V2,population_risk,1515,3.5361510247744476e-10,0
+width256,V0 vs V2,bias_mismatch,1515,1.36021055762e-05,6
+width256,V1 vs V2,population_risk,1515,0.0,0
+width256,V1 vs V2,bias_mismatch,1515,0.0,0
+fixed_alpha,V0 vs V1,population_risk,2250,1.489780521168882e-14,0
+fixed_alpha,V0 vs V1,bias_mismatch,2250,5.234372935092324e-10,0
+fixed_alpha,V0 vs V2,population_risk,2250,1.489780521168882e-14,0
+fixed_alpha,V0 vs V2,bias_mismatch,2250,5.234372935092324e-10,0
+fixed_alpha,V1 vs V2,population_risk,2250,0.0,0
+fixed_alpha,V1 vs V2,bias_mismatch,2250,0.0,0

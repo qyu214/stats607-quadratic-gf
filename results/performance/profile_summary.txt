@@ -1,0 +1,33 @@
+Sat Nov 14 20:52:40 2026    results/performance/baseline.prof
+
+         1460146 function calls (1435343 primitive calls) in 2.932 seconds
+
+   Ordered by: cumulative time
+   List reduced from 3553 to 25 due to restriction <25>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+    819/1    0.003    0.000    2.933    2.933 {built-in method builtins.exec}
+        1    0.000    0.000    2.933    2.933 <frozen runpy>:206(run_module)
+        1    0.000    0.000    2.932    2.932 <frozen runpy>:65(_run_code)
+        1    0.000    0.000    2.932    2.932 simulation.py:1(<module>)
+        1    0.000    0.000    2.249    2.249 simulation.py:63(main)
+        1    0.000    0.000    2.245    2.245 simulation.py:22(simulate)
+        1    0.000    0.000    2.244    2.244 methods.py:37(solve_paper_population_gf)
+        1    0.002    0.002    2.225    2.225 ivp.py:160(solve_ivp)
+     1481    0.001    0.000    2.211    0.001 base.py:179(step)
+     1481    0.025    0.000    2.210    0.001 rk.py:111(_step_impl)
+     1566    0.129    0.000    2.158    0.001 rk.py:14(rk_step)
+     9398    0.002    0.000    2.029    0.000 base.py:156(fun)
+     9398    0.004    0.000    2.027    0.000 base.py:23(fun_wrapped)
+     9398    0.036    0.000    2.023    0.000 methods.py:45(rhs)
+     9499    1.850    0.000    1.944    0.000 methods.py:23(population_risk_and_gradients)
+      120    0.001    0.000    1.889    0.016 __init__.py:1(<module>)
+   983/11    0.002    0.000    0.686    0.062 <frozen importlib._bootstrap>:1349(_find_and_load)
+   973/11    0.001    0.000    0.685    0.062 <frozen importlib._bootstrap>:1304(_find_and_load_unlocked)
+   937/10    0.001    0.000    0.685    0.069 <frozen importlib._bootstrap>:911(_load_unlocked)
+   792/10    0.001    0.000    0.685    0.068 <frozen importlib._bootstrap_external>:1017(exec_module)
+  2279/22    0.002    0.000    0.680    0.031 <frozen importlib._bootstrap>:480(_call_with_frames_removed)
+  610/130    0.000    0.000    0.419    0.003 {built-in method builtins.__import__}
+        1    0.000    0.000    0.353    0.353 methods.py:1(<module>)
+ 1015/574    0.001    0.000    0.353    0.001 <frozen importlib._bootstrap>:1398(_handle_fromlist)
+   137/82    0.000    0.000    0.250    0.003 <frozen importlib._bootstrap_external>:1323(exec_module)
