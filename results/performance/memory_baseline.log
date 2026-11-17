@@ -1,0 +1,20 @@
+Completed 1/1: beta=0.35, alpha=0.35, r_s=64, rep=0
+Saved 101 timepoint records in results/performance/memory_baseline.csv; runtime 2.15s
+        2.77 real         2.42 user         0.09 sys
+           137461760  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+               17218  page reclaims
+                1826  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                1186  voluntary context switches
+                1686  involuntary context switches
+         27084547446  instructions retired
+         10629241395  cycles elapsed
+           109822504  peak memory footprint

@@ -28,7 +28,7 @@ Here `W` has shape `d × r_s`, and both the covariance matrix $\Sigma$ and teach
 
 $$
 \dot W=-\frac{4}{r_s}(\Sigma W)K+4\Sigma B\Sigma W+2e\Sigma W,
-\qquad e=b-\frac{\operatorname{tr}(K)}{r_s}.
+\qquad e=b-\frac{\mathrm{tr}(K)}{r_s}.
 $$
 
 In `src/methods_optimized.py`, this becomes:
@@ -86,6 +86,8 @@ For the 15-trajectory `d=256` width experiment:
 | 1 | 12.162 s | 1.00× | 100% |
 | 2 | 7.488 s | 1.62× | 81% |
 | 4 | 5.739 s | 2.12× | 53% |
+
+![Parallel speedup](../results/performance/parallel_speedup.png)
 
 Each worker setting was timed three times, with one BLAS thread per process. All 1,515 saved time-point records matched across worker counts. Four workers were fastest among those tested, but the speedup was not linear because of process startup, scheduling, and shared resources.
 

@@ -32,7 +32,7 @@ The simulation took 2.245 s under `cProfile`; about **86.6%** was spent in `popu
 
 Each call forms `W @ W.T / r_s` and a dense weighted residual matrix, then multiplies that matrix by `W`. The RHS also calculates the risk even though the solver only needs gradients. I will focus on these calculations in the optimized version. Since profiling adds overhead, I will use separate timings to measure speedup.
 
-Profiler output: `results/performance/baseline.prof` and `results/performance/profile_summary.txt`.
+Profiler summary: `results/performance/profile_summary.txt`. The raw `baseline.prof` file can be regenerated with `make profile`.
 
 ## 3. Computational complexity
 
