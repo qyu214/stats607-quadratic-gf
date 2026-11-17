@@ -113,7 +113,7 @@ Overall, the full workflow took about **70% less time** with both optimizations.
 
 ## 5. Correctness and numerical checks
 
-The test suite passed **24 tests**. Baseline and optimized stability checks each passed **11/11** cases, with no captured warnings, solver failures, or flagged risk diagnostics.
+The test suite passed **25 tests**. Baseline and optimized stability checks each passed **11/11** cases, with no captured warnings, solver failures, or flagged risk diagnostics.
 
 In the full-study comparison, population risks agreed closely (maximum difference `3.536e-10`). Six `bias_mismatch` values in the `d=256` experiment exceeded the initial comparison tolerance, with a maximum difference of `1.360e-5` at `r_s=128`, replicate 0. Using tighter RK45 tolerances (`rtol=1e-8`, `atol=1e-10`) reduced the maximum difference between the two implementations to `4.263e-13`. This is consistent with sensitivity to the numerical integration tolerances. V1 and V2 produced identical saved outputs in the full-study comparison.
 
